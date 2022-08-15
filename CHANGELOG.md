@@ -6,11 +6,17 @@ CHANGELOG
 **CHANGES**
 Upgrade Python runtime used by Lambda functions in AWS Batch integration to python3.9.
 
-2.11.7
+2.11.8
 -----
 
 **CHANGES**
 - Upgrade Slurm to version 21.08.8-2
+
+2.11.7
+-----
+
+**CHANGES**
+- Upgrade Slurm to version 20.11.9.
 
 2.11.6
 -----
