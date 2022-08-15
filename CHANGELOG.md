@@ -10,7 +10,7 @@ Upgrade Python runtime used by Lambda functions in AWS Batch integration to pyth
 -----
 
 **CHANGES**
-- Upgrade Slurm to version 20.11.9.
+- Upgrade Slurm to version 21.08.8-2
 
 2.11.6
 -----
