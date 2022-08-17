@@ -858,7 +858,7 @@ def _test_cluster_limits(slurm_commands, partition, instance_type, max_count, cp
 
 
 def _submit_command_and_assert_job_rejected(
-        slurm_commands, submit_command_args, reason="sbatch: error: Batch job submission failed:"
+    slurm_commands, submit_command_args, reason="sbatch: error: Batch job submission failed:"
 ):
     """Submit a limit-violating job and assert the job is failed at submission."""
     result = slurm_commands.submit_command(**submit_command_args)
