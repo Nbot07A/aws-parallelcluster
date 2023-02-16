@@ -845,12 +845,10 @@ def external_shared_storage_stack(request, test_datadir, region, vpc_stack: CfnV
             if request.config.getoption(option):
                 stack = CfnStack(name=request.config.getoption(option), region=region, template=template)
             else:
-
                 vpc = vpc_stack.cfn_outputs["VpcId"]
                 public_subnet_id = vpc_stack.get_public_subnet()
-                private_subnets = vpc_stack.get_all_private_subnets()
-                subnet_id0 = private_subnets[0]
-                subnet_id1 = private_subnets[1]
+                subnet_id0 = vpc_stack.cfn_outputs["PrivateSubnetId"]
+                subnet_id1 = vpc_stack.cfn_outputs["PrivateAz2SubnetId"]
                 import_path = "s3://{0}".format(bucket_name)
                 export_path = "s3://{0}/export_dir".format(bucket_name)
                 params = [
