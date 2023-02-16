@@ -845,19 +845,12 @@ def external_shared_storage_stack(request, test_datadir, region, vpc_stack: CfnV
             if request.config.getoption(option):
                 stack = CfnStack(name=request.config.getoption(option), region=region, template=template)
             else:
-                # Choose subnets from different availability zones
-                subnet_ids = vpc_stack.get_all_public_subnets() + vpc_stack.get_all_private_subnets()
-                subnets = boto3.client("ec2").describe_subnets(SubnetIds=subnet_ids)["Subnets"]
-                available_subnet_ids = [subnets[0]["SubnetId"]]
-                for subnet in subnets:
-                    if subnet["AvailabilityZone"] != subnets[0]["AvailabilityZone"]:
-                        available_subnet_ids.append(subnet["SubnetId"])
-                        break
 
                 vpc = vpc_stack.cfn_outputs["VpcId"]
                 public_subnet_id = vpc_stack.get_public_subnet()
-                subnet_id0 = available_subnet_ids[0]
-                subnet_id1 = available_subnet_ids[1]
+                private_subnets = vpc_stack.get_all_private_subnets()
+                subnet_id0 = private_subnets[0]
+                subnet_id1 = private_subnets[1]
                 import_path = "s3://{0}".format(bucket_name)
                 export_path = "s3://{0}/export_dir".format(bucket_name)
                 params = [
